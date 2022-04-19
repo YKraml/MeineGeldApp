@@ -9,6 +9,12 @@
         android:title="History" />
 
     <item
+        android:id="@+id/regularly"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_calendar_month_24"
+        android:title="Regularly" />
+
+    <item
         android:id="@+id/statistic"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_trending_up_24"
