@@ -1,14 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MeineGeldApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primaryLight</item>
-        <item name="colorOnPrimary">@color/onPrimaryLight</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondaryLight</item>
-        <item name="colorOnSecondary">@color/onSecondaryLight</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/onSurfaceLight</item>
-        <!-- Customize your theme here. -->
+    <style name="Theme.MeineGeldApp" parent="Theme.Material3.Dark.NoActionBar">
+
     </style>
 </resources>
