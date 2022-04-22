@@ -37,23 +37,22 @@ public class TransactionManager {
         transactions.add(new Transaction(date, -amount, group, description));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public List<Transaction> getTransactions() {
-        transactions.sort((transaction, t1) -> 0);
         return Collections.unmodifiableList(transactions);
     }
 
     public void fillListWithDummyData() {
-        Group group = new Group("Eine Gruppe");
-        addExpense(Calendar.getInstance().getTime(), 10, group, "Beschreibung 1");
-        addExpense(Calendar.getInstance().getTime(), 20, group, "Beschreibung 2");
-        addExpense(Calendar.getInstance().getTime(), 30, group, "Beschreibung 3");
-        addExpense(Calendar.getInstance().getTime(), 30, group, "Beschreibung 4");
-        addExpense(Calendar.getInstance().getTime(), 40, group, "Beschreibung 5");
-        addIncome(Calendar.getInstance().getTime(), 10, group, "Beschreibung 1");
-        addIncome(Calendar.getInstance().getTime(), 20, group, "Beschreibung 2");
-        addIncome(Calendar.getInstance().getTime(), 30, group, "Beschreibung 3");
-        addIncome(Calendar.getInstance().getTime(), 40, group, "Beschreibung 4");
-        addIncome(Calendar.getInstance().getTime(), 40, group, "Beschreibung 5");
+        GroupManager gm = GroupManager.getInstance();
+        addExpense(Calendar.getInstance().getTime(), 10, gm.getGroupById(1), "Beschreibung 1");
+        addExpense(Calendar.getInstance().getTime(), 20, gm.getGroupById(2), "Beschreibung 2");
+        addExpense(Calendar.getInstance().getTime(), 30, gm.getGroupById(3), "Beschreibung 3");
+        addExpense(Calendar.getInstance().getTime(), 30, gm.getGroupById(4), "Beschreibung 4");
+        addExpense(Calendar.getInstance().getTime(), 40, gm.getGroupById(5), "Beschreibung 5");
+        addIncome(Calendar.getInstance().getTime(), 10, gm.getGroupById(1), "Beschreibung 1");
+        addIncome(Calendar.getInstance().getTime(), 20, gm.getGroupById(2), "Beschreibung 2");
+        addIncome(Calendar.getInstance().getTime(), 30, gm.getGroupById(3), "Beschreibung 3");
+        addIncome(Calendar.getInstance().getTime(), 40, gm.getGroupById(4), "Beschreibung 4");
+        addIncome(Calendar.getInstance().getTime(), 40, gm.getGroupById(5), "Beschreibung 5");
     }
 }

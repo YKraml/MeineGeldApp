@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:id="@+id/fadeBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="?android:colorAccent"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:layerType="hardware"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -36,6 +51,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_outline_euro_24"
         android:visibility="invisible"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/extendButton"
@@ -49,6 +65,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_outline_euro_24"
         android:visibility="invisible"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton1"
@@ -61,6 +78,7 @@
         android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_outline_calendar_month_24"
         android:visibility="invisible"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton2"
@@ -73,6 +91,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_outline_calendar_month_24"
         android:visibility="invisible"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton3"
@@ -85,8 +104,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
+        android:elevation="5dp"
         android:text="Ausgabe"
         android:textAlignment="textEnd"
+        android:textColor="?android:textColorPrimary"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton1"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton1" />
@@ -97,8 +118,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
+        android:elevation="5dp"
         android:text="Einnahme"
         android:textAlignment="textEnd"
+        android:textColor="?android:textColorPrimary"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton2"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton2" />
@@ -109,8 +132,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
+        android:elevation="5dp"
         android:text="Wiederholende Ausgabe"
         android:textAlignment="textEnd"
+        android:textColor="?android:textColorPrimary"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton3"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton3" />
@@ -121,8 +146,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
+        android:elevation="5dp"
         android:text="Wiederholende Einnahme"
         android:textAlignment="textEnd"
+        android:textColor="?android:textColorPrimary"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton4"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton4" />
@@ -132,9 +159,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

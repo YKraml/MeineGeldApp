@@ -23,11 +23,33 @@ public class GroupManager {
     }
 
     private void fillWithDummyData() {
-        groups.add(new Group("Einkauf"));
-        groups.add(new Group("Ausgehen"));
-        groups.add(new Group("Tanken"));
-        groups.add(new Group("Geschenke"));
-        groups.add(new Group("Freizeit"));
+        groups.add(new Group("Einkauf", 1));
+        groups.add(new Group("Ausgehen", 2));
+        groups.add(new Group("Tanken", 3));
+        groups.add(new Group("Geschenke", 4));
+        groups.add(new Group("Freizeit", 5));
+    }
+
+    public Group getGroupByName(String name) {
+
+        for (Group group : groups) {
+            if (group.getName().equals(name)) {
+                return group;
+            }
+        }
+
+        return null;
+    }
+
+    public Group getGroupById(int id) {
+
+        for (Group group : groups) {
+            if (group.getId() == id) {
+                return group;
+            }
+        }
+
+        return null;
     }
 
     public List<Group> getGroups() {

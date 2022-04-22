@@ -1,5 +1,7 @@
 package com.example.meinegeldapp.model;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -33,5 +35,21 @@ public class Transaction {
                 ", group=" + group +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -2,6 +2,7 @@ package com.example.meinegeldapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -49,30 +50,29 @@ public class MainActivity extends AppCompatActivity {
         views.add(fab2);
         views.add(fab3);
         views.add(fab4);
-        views.add(
-
-                findViewById(R.id.textView1));
-        views.add(
-
-                findViewById(R.id.textView2));
-        views.add(
-
-                findViewById(R.id.textView3));
-        views.add(
-
-                findViewById(R.id.textView4));
+        views.add(findViewById(R.id.textView1));
+        views.add(findViewById(R.id.textView2));
+        views.add(findViewById(R.id.textView3));
+        views.add(findViewById(R.id.textView4));
 
         addFab.setOnClickListener(view ->
-
-        {
-            onAddButtonClicked(addFab, views);
-        });
+                onAddButtonClicked(addFab, views));
     }
 
     private void onAddButtonClicked(FloatingActionButton addButton, List<View> buttons) {
         addButtonIsPressedDown = !addButtonIsPressedDown;
         setFabVisibility(buttons);
         setFabAnimation(addButton, buttons);
+
+        final View fadeBackground = findViewById(R.id.fadeBackground);
+        if (addButtonIsPressedDown) {
+            fadeBackground.setVisibility(View.VISIBLE);
+            fadeBackground.animate().alpha(0.7f);
+        } else {
+            fadeBackground.setVisibility(View.GONE);
+            fadeBackground.animate().alpha(0);
+        }
+
     }
 
     private void setFabAnimation(FloatingActionButton addButton, List<View> views) {

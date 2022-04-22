@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/onSurfaceLight"
+            android:background="?android:colorPrimary"
             android:paddingStart="6dp"
             android:paddingEnd="16dp"
             app:contentInsetStartWithNavigation="0dp"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ausgabe erstellen"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/onPrimaryLight" />
+                android:textColor="?android:textColorPrimary" />
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
