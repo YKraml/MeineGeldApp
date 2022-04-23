@@ -23,11 +23,11 @@ public class GroupManager {
     }
 
     private void fillWithDummyData() {
-        groups.add(new Group("Einkauf", 1));
-        groups.add(new Group("Ausgehen", 2));
-        groups.add(new Group("Tanken", 3));
-        groups.add(new Group("Geschenke", 4));
-        groups.add(new Group("Freizeit", 5));
+        groups.add(new Group("Einkauf"));
+        groups.add(new Group("Ausgehen"));
+        groups.add(new Group("Tanken"));
+        groups.add(new Group("Geschenke"));
+        groups.add(new Group("Freizeit"));
     }
 
     public Group getGroupByName(String name) {
@@ -38,19 +38,11 @@ public class GroupManager {
             }
         }
 
-        return null;
+        Group group = new Group(name);
+        groups.add(group);
+        return group;
     }
 
-    public Group getGroupById(int id) {
-
-        for (Group group : groups) {
-            if (group.getId() == id) {
-                return group;
-            }
-        }
-
-        return null;
-    }
 
     public List<Group> getGroups() {
         return groups;

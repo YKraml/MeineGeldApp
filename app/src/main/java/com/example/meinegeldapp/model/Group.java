@@ -1,27 +1,23 @@
 package com.example.meinegeldapp.model;
 
-public class Group {
+import java.io.Serializable;
+import java.util.UUID;
 
+public class Group implements Serializable {
+
+    private final String id;
     private String name;
-    private final int id;
 
-    public Group(String name, int id) {
+    public Group(String name) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "Group{" +
-                "name='" + name + '\'' +
-                '}';
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 }

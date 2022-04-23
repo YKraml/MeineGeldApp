@@ -1,27 +1,40 @@
 package com.example.meinegeldapp.model;
 
+import android.content.Context;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class TransactionManager {
+public class TransactionManager implements Serializable {
 
     private static TransactionManager instance;
 
+    transient private Context context;
+
     private final List<Transaction> transactions;
 
-    public static TransactionManager getInstance() {
+    public static void createInstance(Context context) {
         if (instance == null) {
-            instance = new TransactionManager();
-            // TODO: 20.04.2022 Delete the following line:
-            instance.fillListWithDummyData();
+            instance = load(context);
+            instance.context = context;
         }
+    }
+
+    public static TransactionManager getInstance() {
         return instance;
     }
 
@@ -29,30 +42,61 @@ public class TransactionManager {
         transactions = new ArrayList<>();
     }
 
-    public void addIncome(Date date, int amount, Group group, String description) {
-        transactions.add(new Transaction(date, amount, group, description));
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
+        save(context);
     }
 
-    public void addExpense(Date date, int amount, Group group, String description) {
-        transactions.add(new Transaction(date, -amount, group, description));
+    private static TransactionManager load(Context context) {
+
+        try {
+            FileInputStream fi = context.openFileInput("TransactionManager.txt");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            TransactionManager transactionManager = (TransactionManager) oi.readObject();
+            oi.close();
+            fi.close();
+            return transactionManager;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new TransactionManager();
     }
 
+    private void save(Context context) {
+
+        try {
+
+            File file = new File(context.getFilesDir(), "TransactionManager.txt");
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileOutputStream f = context.openFileOutput("TransactionManager.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream o = new ObjectOutputStream(f);
+
+            o.writeObject(this);
+            o.close();
+            f.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     public List<Transaction> getTransactions() {
         return Collections.unmodifiableList(transactions);
     }
 
-    public void fillListWithDummyData() {
-        GroupManager gm = GroupManager.getInstance();
-        addExpense(Calendar.getInstance().getTime(), 10, gm.getGroupById(1), "Beschreibung 1");
-        addExpense(Calendar.getInstance().getTime(), 20, gm.getGroupById(2), "Beschreibung 2");
-        addExpense(Calendar.getInstance().getTime(), 30, gm.getGroupById(3), "Beschreibung 3");
-        addExpense(Calendar.getInstance().getTime(), 30, gm.getGroupById(4), "Beschreibung 4");
-        addExpense(Calendar.getInstance().getTime(), 40, gm.getGroupById(5), "Beschreibung 5");
-        addIncome(Calendar.getInstance().getTime(), 10, gm.getGroupById(1), "Beschreibung 1");
-        addIncome(Calendar.getInstance().getTime(), 20, gm.getGroupById(2), "Beschreibung 2");
-        addIncome(Calendar.getInstance().getTime(), 30, gm.getGroupById(3), "Beschreibung 3");
-        addIncome(Calendar.getInstance().getTime(), 40, gm.getGroupById(4), "Beschreibung 4");
-        addIncome(Calendar.getInstance().getTime(), 40, gm.getGroupById(5), "Beschreibung 5");
+    public Transaction getTransactionById(String id) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getId().equals(id)) {
+                return transaction;
+            }
+        }
+        return null;
     }
+
 }

@@ -7,7 +7,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryFragment">
+    tools:context=".fragments.HistoryFragment">
 
     <HorizontalScrollView
         android:id="@+id/HorizontalScrollView_fragmentHistory"
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Alles"
+                android:text="Alle"
                 app:chipIconVisible="true" />
 
             <com.google.android.material.chip.Chip

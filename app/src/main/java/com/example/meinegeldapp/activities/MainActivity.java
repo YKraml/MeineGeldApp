@@ -1,15 +1,21 @@
-package com.example.meinegeldapp;
+package com.example.meinegeldapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.example.meinegeldapp.fab.activities.CreateIncomeActivity;
+import com.example.meinegeldapp.fragments.MoreFragment;
+import com.example.meinegeldapp.R;
+import com.example.meinegeldapp.fragments.RegularlyFragment;
+import com.example.meinegeldapp.fragments.StartFragment;
+import com.example.meinegeldapp.fragments.StatisticFragment;
+import com.example.meinegeldapp.fragments.HistoryFragment;
+import com.example.meinegeldapp.model.TransactionManager;
+import com.example.meinegeldapp.model.TransactionType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,22 +34,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TransactionManager.createInstance(getApplicationContext());
 
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.containerView, StartFragment.class, null).commit();
 
-
         addListenersToBottomNavigationView();
-
 
         FloatingActionButton addFab = findViewById(R.id.extendButton);
         FloatingActionButton fab1 = findViewById(R.id.floatingActionButton1);
         FloatingActionButton fab2 = findViewById(R.id.floatingActionButton2);
         FloatingActionButton fab3 = findViewById(R.id.floatingActionButton3);
         FloatingActionButton fab4 = findViewById(R.id.floatingActionButton4);
-
-        fab1.setOnClickListener(view -> {
-            startActivity(new Intent(this, CreateIncomeActivity.class));
-        });
 
         List<View> views = new ArrayList<>();
         views.add(fab1);
@@ -55,14 +56,29 @@ public class MainActivity extends AppCompatActivity {
         views.add(findViewById(R.id.textView3));
         views.add(findViewById(R.id.textView4));
 
-        addFab.setOnClickListener(view ->
-                onAddButtonClicked(addFab, views));
+        fab1.setOnClickListener(view -> {
+            onAddButtonClicked(addFab, views);
+            Intent intent = new Intent(this, CreateTransactionActivity.class);
+            intent.putExtra("Type", TransactionType.Expense);
+            startActivity(intent);
+        });
+
+        fab2.setOnClickListener(view -> {
+            onAddButtonClicked(addFab, views);
+            Intent intent = new Intent(this, CreateTransactionActivity.class);
+            intent.putExtra("Type", TransactionType.Income);
+            startActivity(intent);
+        });
+
+        addFab.setOnClickListener(view -> {
+            onAddButtonClicked(addFab, views);
+        });
     }
 
-    private void onAddButtonClicked(FloatingActionButton addButton, List<View> buttons) {
+    private void onAddButtonClicked(FloatingActionButton addButton, List<View> viewsToAnimate) {
         addButtonIsPressedDown = !addButtonIsPressedDown;
-        setFabVisibility(buttons);
-        setFabAnimation(addButton, buttons);
+        setFabVisibility(viewsToAnimate);
+        setFabAnimation(addButton, viewsToAnimate);
 
         final View fadeBackground = findViewById(R.id.fadeBackground);
         if (addButtonIsPressedDown) {
